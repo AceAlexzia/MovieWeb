@@ -1,0 +1,28 @@
+﻿@model Movie
+
+@{
+    ViewData["Title"] = "Edit Review";
+}
+<h1 class="text-center">Edit Review</h1>
+<form method="post" asp-controller="WebHome" asp-action="Edit">
+    <div class="from-group">
+        <label asp-for="title">Title</label>
+        <input type="text" asp-for="title" class="form-control" />
+        <span asp-validation-for="title" class="text-danger"></span>
+    </div>
+    <div class="from-group">
+        <label asp-for="description">Description</label>
+        <input type="text" asp-for="description" class="form-control" />
+    </div>
+    <div class="from-group">
+        <label asp-for="imgUrl">Image URL</label>
+        <input type="url" asp-for="imgUrl" class="form-control" />
+        <span asp-validation-for="imgUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="rating">Rating</label>
+        <input type="number" step=".01" asp-for="rating" class="form-control" />
+        <span asp-validation-for="rating" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary my-2">Edit Review</button>
+</form>

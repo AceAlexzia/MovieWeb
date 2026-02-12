@@ -35,5 +35,47 @@ namespace MovieWeb.Controllers
             }
             return View(movie);
         }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == 0 || id == null)
+            {
+                return NotFound();
+            }
+            var movie = _db.Movies.Find(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return View(movie);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Movie movie)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Movies.Update(movie);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(movie);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            if (id == 0 || id == null)
+            {
+                return NotFound();
+            }
+            var movie = _db.Movies.Find(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            _db.Movies.Remove(movie);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

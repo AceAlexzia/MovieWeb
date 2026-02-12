@@ -25,9 +25,9 @@
                     <td>@movie.id</td>
                     <td>@movie.title</td>
                     <td>@movie.description</td>
-                    <td>@movie.rating</td>
-                    <td><a class="btn btn-warning" asp-controller="Student" asp-action="Edit" asp-route-id="@movie.id">Edit</a></td>
-                    <td><a class="btn btn-danger" asp-controller="Student" asp-action="Delete" asp-route-id="@movie.id" onclick="return confirm('Do you want to delete @movie.title?')">Delete</a></td>
+                    <td>@movie.rating/10</td>
+                    <td><a class="btn btn-warning" asp-controller="WebHome" asp-action="Edit" asp-route-id="@movie.id">Edit</a></td>
+                    <td><a class="btn btn-danger" asp-controller="WebHome" asp-action="Delete" asp-route-id="@movie.id" onclick="return confirm('Do you want to delete @movie.title?')">Delete</a></td>
                 </tr>
             }
         </tbody>
