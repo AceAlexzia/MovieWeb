@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieWeb.Data;
 using MovieWeb.Models;
 
 namespace MovieWeb.Controllers
 {
     public class WebHomeController : Controller
     {
+        private readonly ApplicationDBContext _db;
+        public WebHomeController(ApplicationDBContext db)
+        {
+            _db = db;
+        }
         public IActionResult Index()
         {
             Movie movie1 = new Movie();
@@ -25,6 +31,24 @@ namespace MovieWeb.Controllers
             movies.Add(movie1);
             movies.Add(movie2);
             return View(movies);
+        }
+
+        // GET Method for showing Form webpage without this it will be unable to open the create form page
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Movie movie)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Movies.Add(movie);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(movie);
         }
     }
 }
